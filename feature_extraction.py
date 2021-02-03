@@ -3,22 +3,6 @@ import argparse
 import numpy as np
 from util import load_function_words, load_reviews, split_data
 
-# do not alter this function
-def check_splits(train, test, X, ids):
-    """verify that all data is retained after splitting"""
-    # check X
-    train_X = train[0]
-    val_X = test[0]
-    sum_after = train_X.sum()+val_X.sum()
-    assert sum_after == X.sum(), \
-        f"Sum of features in Train+Test {sum_after} must equal sum of features before splitting {X.sum}"
-
-    all_ids = train[1] + test[1]
-    assert set(all_ids) == set(ids), "Set of ids in Train+Test must equal set of ids before splitting"
-    # if we didn't crash, everything's good!
-    print("Split checks passed!")
-
-
 
 def main(data_file, vocab_path):
     """extract function word features from a text file"""
@@ -29,19 +13,19 @@ def main(data_file, vocab_path):
     reviews, ids = load_reviews(data_file)
 
 
-    # TODO: appropriately shape and fill this matrix
+    # TODO 0: appropriately shape and fill this matrix
     review_features = np.zeros((1,1), dtype=np.int)
     # row is which review
     # column is which word
 
     print(f"Numpy array has shape {review_features.shape} and dtype {review_features.dtype}")
 
-    # TODO: Calculate these from review_features
+    # TODO 1: Figure out what the most common word (feature) is in review_features. Do not hardcode the answer
     most_common_count = 0
     most_common_word = ""
     print(f"Most common word: {most_common_word}, count: {most_common_count}")
 
-    # TODO: Find any features that weren't in the data (i.e. columns that sum to 0)
+    # TODO 2: Find any features that weren't in the data (i.e. columns that sum to 0)
     zero_inds = []
     if len(zero_inds)>0:
         print("No instances found for: ")
@@ -54,31 +38,30 @@ def main(data_file, vocab_path):
     matrix_sum = review_features.sum()
     print(f"Sum of raw count matrix: {matrix_sum}")
 
-    # TODO: make a binary feature vector from your count vector
+    # TODO 1: make a binary feature vector from your count vector
     word_binary = np.copy(review_features)
     word_binary_sum = word_binary.sum()
-    print(f"Sum of binary matrix: {word_binary_sum}")
+    print(f"1: Sum of binary matrix: {word_binary_sum}")
 
-    # TODO: normalize features for review length (divide rows by number of function words in the review)
+    # TODO 2: normalize features for review length (divide rows by number of *function words* in the review)
     # HINT: each row should sum to 1
     norm_reviews = np.copy(review_features)
     norm_reviews_sum = norm_reviews.sum()
-    print(f"Sum of normed matrix: {norm_reviews_sum}")
+    print(f"2: Sum of normed matrix: {norm_reviews_sum}")
 
-    # TODO: remove features from <review_features> that occur less than <min_count> times
+    # TODO 3: remove features from <review_features> that occur less than <min_count> times
     min_count = 100
     min_matrix = np.copy(review_features)
     min_matrix_shape = min_matrix.shape
-    print(f"Shape after removing features that occur < {min_count} times: {min_matrix_shape}")
+    print(f"3: Shape after removing features that occur < {min_count} times: {min_matrix_shape}")
 
-    #TODO: split the dataset by updating the function above
-
-    train, val = split_data(review_features, ids, 0.3)
-
-    # Code below that all your data has been retained in your splits; do not edit.
-    # Must all print True
-
-    check_splits(train, val, review_features, ids)
+    # TODO 4: normalize features by each feature's *document frequency*
+    # For THIS exercise, divide each count by the number of documents that has that feature at all
+    # (be careful not to divide by *total count* of the feature)
+    # perform this on the matrix from TODO 3
+    df_norm_reviews = np.copy(review_features)
+    df_norm_reviews_sum = df_norm_reviews.sum()
+    print(f"4: Sum of document frequency normed matrix: {df_norm_reviews_sum}")
 
 
 if __name__ == '__main__':

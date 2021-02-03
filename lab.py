@@ -13,7 +13,6 @@ def main(data_file):
 
     # debug using just a few
     reviews = reviews[:10]
-    ids = ids[:10]
 
     feature_key = ["the", "or", "and"]
 
@@ -26,16 +25,20 @@ def main(data_file):
     # TODO: Create the same feature vectors as a numpy array
     feature_np = np.zeros(((len(reviews)), len(feature_key)), dtype=np.int)
 
-    # TODO: Cast your feature_lists to a numpy array and then verify it is equivalent to feature_np
+    # Verify your list and numpy array are the same result
+    are_equal = np.array_equal(np.asarray(feature_lists), feature_np)
+    if are_equal:
+        print("Numpy and list reprs are the same!")
+    else:
+        print("Numpy and list reprs are not equivalent. Keep trying!")
 
-    # TODO: Shuffle the list of id's and the feature matrix in unison. Then check your work
-    print(f"Shuffling data")
-    #TODO: define this function in util.py
-    shuffled_feature_matrix, shuffled_ids = shuffle_dataset(feature_np, ids)
-    print("ids before shuffle")
-    print(ids)
-    print("ids after shuffle")
-    print(shuffled_ids)
+    # TODO: Calculate the total count per feature using your np array and .sum
+    count_per_feat = [0,0,0]
+
+    for i, feature_name in enumerate(feature_key):
+        print(f"Count of '{feature_name}': {count_per_feat[i]}")
+
+
 
 
 

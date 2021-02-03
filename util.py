@@ -33,25 +33,3 @@ def shuffle_dataset(data, id_strs):
     shuffled_ids = id_strs
     shuffled_data = data
     return (shuffled_data, shuffled_ids)
-
-# TODO: write this function (homework)
-def split_data(X, file_ids, test_percent = 0.3, shuffle=True):
-    """
-    Splits dataset for supervised learning and evaluation
-    :param X: iterable of features
-    :param file_ids: iterable of file id's corresponding the features in X
-    :param test_percent: percent data to
-    :param shuffle:
-    :return: two tuples, (X_train, file_ids_train), (X_test, file_ids_test)
-    """
-    if shuffle:
-        X, file_ids = shuffle_dataset(X, file_ids)
-
-    # edit this to split the dataset
-    X_train = X
-    X_test = X
-    file_ids_train = file_ids
-    file_ids_test = file_ids
-    train = X_train, file_ids_train
-    test = X_test, file_ids_test
-    return train, test

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import argparse
-from util import load_reviews, shuffle_dataset
+from util import load_reviews
 import numpy as np
 
 

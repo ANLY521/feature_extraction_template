@@ -21,15 +21,3 @@ def load_reviews(data_file):
     reviews = []
     ids = []
     return reviews,ids
-
-# TODO: write this function (lab)
-def shuffle_dataset(data, id_strs):
-    """
-    Shuffles a list of datapoints and their id's in unison
-    :param data: iterable, each item a datapoint
-    :param id_strs: iterable, each item an id
-    :return: tuple (shuffled_data, shuffled_id_strs)
-    """
-    shuffled_ids = id_strs
-    shuffled_data = data
-    return (shuffled_data, shuffled_ids)

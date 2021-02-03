@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import numpy as np
-from util import load_function_words, load_reviews, split_data
+from util import load_function_words, load_reviews
 
 
 def main(data_file, vocab_path):

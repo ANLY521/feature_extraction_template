@@ -18,50 +18,51 @@ def main(data_file, vocab_path):
     # row is which review
     # column is which word
 
-    print(f"Numpy array has shape {review_features.shape} and dtype {review_features.dtype}")
-
-    # TODO 1: Figure out what the most common word (feature) is in review_features. Do not hardcode the answer
-    most_common_count = 0
-    most_common_word = ""
-    print(f"Most common word: {most_common_word}, count: {most_common_count}")
-
-    # TODO 2: Find any features that weren't in the data (i.e. columns that sum to 0)
-    zero_inds = []
-    if len(zero_inds)>0:
-        print("No instances found for: ")
-        for ind in zero_inds:
-            print(f"  {function_words[ind]}")
-    else:
-        print("All function words found")
-
+    print(f"0: Numpy array has shape {review_features.shape} and dtype {review_features.dtype}")
 
     matrix_sum = review_features.sum()
     print(f"Sum of raw count matrix: {matrix_sum}")
 
-    # TODO 1: make a binary feature vector from your count vector
+    # TODO 1: Figure out what the most common word (feature) is in review_features. Do not hardcode the answer
+    most_common_count = 0
+    most_common_word = ""
+    print(f"1. Most common word: {most_common_word}, count: {most_common_count}")
+
+
+    # TODO 2: Find any features that weren't in the data (i.e. columns that sum to 0)
+    zero_inds = []
+    if len(zero_inds)>0:
+        print("2. No instances found for: ")
+        for ind in zero_inds:
+            print(f"  {function_words[ind]}")
+    else:
+        print("2. All function words found")
+
+
+    # TODO 3: make a binary feature vector from your count vector
     word_binary = np.copy(review_features)
     word_binary_sum = word_binary.sum()
-    print(f"1: Sum of binary matrix: {word_binary_sum}")
+    print(f"3: Sum of binary matrix: {word_binary_sum}")
 
-    # TODO 2: normalize features for review length (divide rows by number of *function words* in the review)
+    # TODO 4: normalize features for review length (divide rows by number of *function words* in the review)
     # HINT: each row should sum to 1
     norm_reviews = np.copy(review_features)
     norm_reviews_sum = norm_reviews.sum()
-    print(f"2: Sum of normed matrix: {norm_reviews_sum}")
+    print(f"4: Sum of normed matrix: {norm_reviews_sum}")
 
-    # TODO 3: remove features from <review_features> that occur less than <min_count> times
+    # TODO 5: remove features from <review_features> that occur less than <min_count> times
     min_count = 100
     min_matrix = np.copy(review_features)
     min_matrix_shape = min_matrix.shape
-    print(f"3: Shape after removing features that occur < {min_count} times: {min_matrix_shape}")
+    print(f"5: Shape after removing features that occur < {min_count} times: {min_matrix_shape}")
 
-    # TODO 4: normalize features by each feature's *document frequency*
+    # TODO 6: normalize features by each feature's *document frequency*
     # For THIS exercise, divide each count by the number of documents that has that feature at all
     # (be careful not to divide by *total count* of the feature)
-    # perform this on the matrix from TODO 3
-    df_norm_reviews = np.copy(review_features)
+    # perform this on the matrix from TODO 5
+    df_norm_reviews = np.copy(min_matrix)
     df_norm_reviews_sum = df_norm_reviews.sum()
-    print(f"4: Sum of document frequency normed matrix: {df_norm_reviews_sum}")
+    print(f"6: Sum of document frequency normed matrix: {df_norm_reviews_sum}")
 
 
 if __name__ == '__main__':

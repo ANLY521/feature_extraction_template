@@ -2,6 +2,7 @@
 import argparse
 from util import load_reviews
 import numpy as np
+from nltk import word_tokenize
 
 
 def main(data_file):
@@ -21,9 +22,23 @@ def main(data_file):
     # TODO: For function words "the", "or" and "and", use a Python list to
     #     make a count vector per review
     feature_lists = []
+    for review in reviews:
+        review_words = word_tokenize(review.lower())
+        vec = []
+        for word in feature_key:
+            these_words = [w for w in review_words if w == word]
+            vec.append(len(these_words))
+        feature_lists.append(vec)
 
     # TODO: Create the same feature vectors as a numpy array
     feature_np = np.zeros(((len(reviews)), len(feature_key)), dtype=np.int)
+    for i,review in enumerate(reviews):
+        review_words = word_tokenize(review.lower())
+        for j,word in enumerate(feature_key):
+            these_words = [w for w in review_words if w == word]
+            feature_np[i,j] = len(these_words)
+
+
 
     # Verify your list and numpy array are the same result
     are_equal = np.array_equal(np.asarray(feature_lists), feature_np)
@@ -33,7 +48,7 @@ def main(data_file):
         print("Numpy and list reprs are not equivalent. Keep trying!")
 
     # TODO: Calculate the total count per feature using your np array and .sum
-    count_per_feat = [0,0,0]
+    count_per_feat = feature_np.sum(axis=0)
 
     for i, feature_name in enumerate(feature_key):
         print(f"Count of '{feature_name}': {count_per_feat[i]}")

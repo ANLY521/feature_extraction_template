@@ -20,4 +20,9 @@ def load_reviews(data_file):
     """
     reviews = []
     ids = []
+    with open(data_file, 'r') as df:
+        for line in df:
+            fields = line.strip().split("\t")
+            reviews.append(fields[-1])
+            ids.append(fields[0])
     return reviews,ids

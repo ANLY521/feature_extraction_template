@@ -37,12 +37,12 @@ Usage `python lab.py --path imdb_practice.txt`
 ## feature_extraction.py
 
 This homework assignment practices creating feature vectors from text. 
-Lowercase everything.
-The code runs but is missing the parts that fill the matrix and perform calculations on it, marked with TODO. Fill in the missing parts of the code
-as directed by the comments. Leave the print statements as they are and replace the variables with calculations,
-e.g. calling "array.sum()".
+Lowercase everything and use the `word_tokenize` function from `nltk` to tokenize.
+The code runs but is missing the parts that fill the matrix and perform calculations on it, marked with TODO. 
+Fill in the missing parts of the code as directed by the comments.
 
-The correct print output for the sample data is saved as imdb_practice_result.txt. Use this to check your work.
+Do not alter the print statements - they are used for grading.
+You can check your output for `imdb_practice.txt` against `imdb_practice_result.txt`.
 For grading, your code will be run on a different data file in the same format and the print-out compared to
 the correct results.
 
